@@ -33,7 +33,7 @@ class LoginScreen extends StatelessWidget {
               key: formKey,
               child: SingleChildScrollView(
                 child: Column(
-                  children: [topPart(), formInputs(), loginButton()],
+                  children: [topPart(), formInputs(), loginButton(context)],
                 ),
               ),
             ),
@@ -98,11 +98,13 @@ class LoginScreen extends StatelessWidget {
     );
   }
 
-  loginButton() {
+  loginButton(context) {
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: 40.w),
       child: MainButton(
-        onPressed: () {},
+        onPressed: () {
+          BlocProvider.of<LoginCubit>(context).loginUser(username: usernameController.text, password: passwordController.text);
+        },
         color: AppColors.primaryColor,
         textColor: AppColors.whiteColor,
         title: 'تسجيل الدخول',
